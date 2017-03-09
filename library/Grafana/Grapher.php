@@ -27,7 +27,7 @@ class Grapher extends GrapherHook
     protected $enableLink = true;
     protected $defaultDashboard = "icinga2-default";
     protected $datasource = null;
-    protected $excludes = null;
+    protected $excludes = array();
 
     protected function init()
     {
@@ -156,7 +156,7 @@ class Grapher extends GrapherHook
 		return $this->getPreviewImage($serviceName, $hostName);
 	}
 
-	$html = '<a href="%s://%s/dashboard/db/%s?var-hostname=%s&var-service=%s&from=now-%s&to=now';
+	$html = '<a href="/grafana/dashboard/db/%s?var-hostname=%s&var-service=%s&from=now-%s&to=now';
 
         if ( $this->dashboard != $this->defaultDashboard )
 	{
@@ -167,8 +167,8 @@ class Grapher extends GrapherHook
 
         return sprintf(
 		$html,
-		$this->protocol,
-		$this->grafanaHost,
+		#$this->protocol,
+		#$this->grafanaHost,
 		$this->dashboard,
 		urlencode($hostName),
 		rawurlencode($serviceName),
